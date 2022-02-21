@@ -1,2 +1,2 @@
 rootProject.name = "Leaflet-kt"
-include("lib")
+include("leaflet-kt")
