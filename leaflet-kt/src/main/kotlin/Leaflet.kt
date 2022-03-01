@@ -355,12 +355,12 @@ external object Leaflet {
 
     open class Marker(latLng: LatLng = definedExternally, option: Option = definedExternally) : InteractiveLayer {
         interface Option : InteractiveLayer.Option {
-            // val icon
+            val icon : Icon
             var keyboard: Boolean
             var title: String
             var alt: String
             var zIndexOffset: Number
-            var opacity: Number
+            val opacity: Number
             var riseOnHover: Boolean
             var riseOffset: Number
             var shadowPane: String
@@ -368,7 +368,8 @@ external object Leaflet {
 
         override val option: Layer.Option
         val dragging: Handler
-
+        open fun getIcon() : Icon
+        open fun setIcon(value : Icon) : Marker
         open fun getLatLng(): LatLng
         open fun setLatLng(latLng: LatLng): Marker
         open fun setZIndexOffset(offset: Number): Marker
@@ -723,3 +724,4 @@ external object Leaflet {
         var noUpdate: Boolean
     }
 }
+

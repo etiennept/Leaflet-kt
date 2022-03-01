@@ -34,11 +34,57 @@ kotlin {
 
 
 }
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(kotlin.sourceSets.main.get().kotlin)
+publishing {
+    repositories {
+        publications {
+            create<MavenPublication>("kotlin") {
+                artifactId = "leaflet-kt"
+                pom {
+                    name.set("Leaflet-kt")
+                    //description.set("A concise description of my library")
+                    //url.set("http://www.example.com/library")
+                    properties.set(mapOf(
+                        "myProp" to "value",
+                        "prop.with.dots" to "anotherValue"
+                    ))
+                    licenses {
+                        license {
+                            name.set("The Apache License, Version 2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+                    developers {
+                        developer {
+                            //id.set("j")
+                            //name.set("John Doe")
+                            email.set("etiennept@gmail.com")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:git://github.com/etiennept/Leaflet-ktt")
+                        developerConnection.set("scm:git:ssh://github.com/etiennept/Leaflet-kt")
+                        url.set("http://github.com/etiennept/Leaflet-kt")
+                    }
+                }
+            }
+        }
+
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url = uri(layout.buildDirectory.dir("libs"))
+
+        }
+    }
 }
 
+
+
+signing{
+    val signingKey: String? = "leafletkt-key"
+    val signingPassword: String? = "leafletkt5323678524323"
+    useInMemoryPgpKeys(signingKey, signingPassword)
+
+}
 
 
 
