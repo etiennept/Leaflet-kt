@@ -1,7 +1,6 @@
 plugins {
     id("org.jetbrains.kotlin.js") version "1.6.10"
     `maven-publish`
-    signing
 
 }
 
@@ -12,9 +11,11 @@ version = "0.0.1"
 repositories {
     mavenCentral()
     mavenLocal()
+    maven ("https://maven.pkg.github.com/etiennept/Leaflet-kt")
 }
 
 dependencies {
+
     implementation(kotlin("stdlib-js"))
     implementation(npm("leaflet" ,"1.7.1" ))
     testImplementation(kotlin("test-js"))
@@ -30,6 +31,8 @@ kotlin {
                 }
             }
         }
+
+
     }
 
 
@@ -37,9 +40,11 @@ kotlin {
 publishing {
     repositories {
         publications {
-            create<MavenPublication>("kotlin") {
+            register<MavenPublication>("kotlin") {
+                from(components["kotlin"])
                 artifactId = "leaflet-kt"
-                pom {
+
+               /* pom {
                     name.set("Leaflet-kt")
                     //description.set("A concise description of my library")
                     //url.set("http://www.example.com/library")
@@ -65,26 +70,24 @@ publishing {
                         developerConnection.set("scm:git:ssh://github.com/etiennept/Leaflet-kt")
                         url.set("http://github.com/etiennept/Leaflet-kt")
                     }
-                }
+                } */
             }
         }
 
         maven {
             // change to point to your repo, e.g. http://my.org/repo
-            url = uri(layout.buildDirectory.dir("libs"))
+            url = uri("https://maven.pkg.github.com/etiennept/Leaflet-kt")
+
+            credentials {
+                username = "etienenpt"
+                password = "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"
+            }
 
         }
     }
 }
 
 
-
-signing{
-    val signingKey: String? = "leafletkt-key"
-    val signingPassword: String? = "leafletkt5323678524323"
-    useInMemoryPgpKeys(signingKey, signingPassword)
-
-}
 
 
 
