@@ -6,7 +6,7 @@ plugins {
 
 
 group = "org.leaflet-kt"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
     mavenCentral()
@@ -80,7 +80,7 @@ publishing {
 
             credentials {
                 username = "etienenpt"
-                password = "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"
+                password = "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"
             }
 
         }
